@@ -1,0 +1,20 @@
+# 统一换行符: 文本文件用 LF(提交到仓库统一换行), Windows 工作区检出时自动转 CRLF
+* text=auto
+
+# 显式声明这些是文本
+*.py text
+*.md text
+*.txt text
+*.yml text
+*.yaml text
+*.json text
+*.ps1 text
+*.bat text
+*.sh text eol=lf
+
+# 图片/二进制
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.docx binary
