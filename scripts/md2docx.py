@@ -553,9 +553,19 @@ def resolve_in(arg):
 
 
 def resolve_out(arg, src):
-    """输出路径: 若未指定, 默认与输入同目录同名 .docx"""
+    """输出路径约定:
+    - 若显式指定 -> 直接用。
+    - 若输入位于某个名为 input/ 的目录 -> 输出到同级 output/ 目录(同名 .docx)。
+    - 其余情况 -> 与输入同目录同名 .docx。
+    """
     if arg:
         return arg
+    src_abs = os.path.abspath(src)
+    src_dir = os.path.dirname(src_abs)
+    # 输入在 input/ 下 => 输出到同级 output/ 下
+    if os.path.basename(src_dir) == 'input':
+        out_dir = os.path.join(os.path.dirname(src_dir), 'output')
+        return os.path.join(out_dir, os.path.splitext(os.path.basename(src))[0] + '.docx')
     return os.path.splitext(src)[0] + '.docx'
 
 
